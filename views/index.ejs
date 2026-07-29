@@ -9,51 +9,51 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Your Custom CSS -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/styles.css">
-<style>
-.autocomplete-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--color-bg);
-  border: 1px solid var(--color-primary);
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-.autocomplete-item {
-  padding: 8px;
-  cursor: pointer;
-}
-.autocomplete-item:hover {
-  background: var(--color-primary);
-  color: #fff;
-}
-</style>
+    <style>
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--color-bg);
+            border: 1px solid var(--color-primary);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .autocomplete-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .autocomplete-item:hover {
+            background: var(--color-primary);
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header Section -->
     <%# AUTH TOP BAR — sits above main header %>
     <div class="auth-top-bar">
-      <% if (currentUser) { %>
-        <% if (isAdmin) { %><a href="/admin">Admin Panel</a> | <% } %>
-        <a href="/profile"><%= currentUser.name.split(' ')[0] %></a> |
-        <a href="/logout">Logout</a>
-      <% } else { %>
-        <a href="/login">Login</a> |
-        <a href="/register">Register</a>
-      <% } %>
+        <% if (currentUser) { %>
+            <% if (isAdmin) { %><a href="/admin">Admin Panel</a> | <% } %>
+            <a href="/profile"><%= currentUser.name.split(' ')[0] %></a> |
+            <a href="/logout">Logout</a>
+        <% } else { %>
+            <a href="/login">Login</a> |
+            <a href="/register">Register</a>
+        <% } %>
     </div>
 
     <%# Flash banners %>
     <% if (flashError && flashError.length > 0) { %>
-      <div class="flash-bar flash-bar--error"><%= flashError[0] %></div>
+        <div class="flash-bar flash-bar--error"><%= flashError[0] %></div>
     <% } %>
     <% if (flashSuccess && flashSuccess.length > 0) { %>
-      <div class="flash-bar flash-bar--success"><%= flashSuccess[0] %></div>
+        <div class="flash-bar flash-bar--success"><%= flashSuccess[0] %></div>
     <% } %>
 
     <header>
@@ -158,16 +158,15 @@
                         <input type="checkbox" id="search-toggle" class="search-toggle-checkbox">
                         <div class="search-form-container">
                             <form action="/search" method="get" role="search">
-    <input type="search" name="q" placeholder="Search" autocomplete="off" id="search-input">
-    <div class="autocomplete-list" id="autocomplete-list"></div>
-    <button type="submit" aria-label="Search">
-        <i class="fas fa-search"></i>
-    </button>
-    <label for="search-toggle" class="search-close">
-        <i class="fas fa-times"></i>
-    </label>
-</form>
-
+                                <input type="search" name="q" placeholder="Search" autocomplete="off" id="search-input">
+                                <div class="autocomplete-list" id="autocomplete-list"></div>
+                                <button type="submit" aria-label="Search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <label for="search-toggle" class="search-close">
+                                    <i class="fas fa-times"></i>
+                                </label>
+                            </form>
                         </div>
                     </div>
                     
@@ -204,7 +203,7 @@
                 <div class="item">
                     <a href="/collections/the-heritage-summer-full-products-main">
                         <picture>
-                            <img src="/images/main1.webp" alt="RoyalTag">
+                            <img src="/images/main1.webp" alt="RoyalTag Heritage Summer Collection">
                         </picture>
                     </a>
                 </div>
@@ -213,7 +212,7 @@
                 <div class="item">
                     <a href="/collections/sp126-polo-shirt">
                         <picture>
-                            <img src="/images/main2.webp" alt="RoyalTag">
+                            <img src="/images/main2.webp" alt="RoyalTag Polo Shirts">
                         </picture>
                     </a>
                 </div>
@@ -222,7 +221,7 @@
                 <div class="item">
                     <a href="/collections/sp126-casual-shirt">
                         <picture>
-                            <img src="/images/main3.webp" alt="RoyalTag">
+                            <img src="/images/main3.webp" alt="RoyalTag Casual Shirts">
                         </picture>
                     </a>
                 </div>
@@ -231,16 +230,16 @@
                 <div class="item">
                     <a href="/collections/sp126-round-neck-shirt">
                         <picture>
-                            <img src="/images/main4.webp" alt="RoyalTag">
+                            <img src="/images/main4.webp" alt="RoyalTag Round Neck Shirts">
                         </picture>
                     </a>
                 </div>
                 
                 <!-- Slide 5 -->
                 <div class="item">
-                    <a href="/collections/sp126-round-neck-shirt">
+                    <a href="/collections/sp126-formal-wear">
                         <picture>
-                            <img src="/images/main5.webp" alt="RoyalTag">
+                            <img src="/images/main5.webp" alt="RoyalTag Formal Wear">
                         </picture>
                     </a>
                 </div>
@@ -279,9 +278,8 @@
                         <p style="text-align: center; width: 100%;">No products found.</p>
                     <% } else { %>
                         <% products.forEach((product, i) => { 
-                            // Pick guaranteed working image numbers (1 to 3) to avoid missing .jpg/.webp errors!
                             let idx = (i % 3) + 1; 
-                            let nextIdx = ((i + 1) % 3) + 1; // Guaranteed different image for hover!
+                            let nextIdx = ((i + 1) % 3) + 1;
                             let imgPath1 = "";
                             let imgPath2 = "";
                             
@@ -293,8 +291,8 @@
                                 imgPath2 = `/images/product${nextIdx}.webp`;
                                 
                                 if (product.category === 'Casual') {
-                                    imgPath1 = `/images/causal-product${idx}.webp`;
-                                    imgPath2 = `/images/causal-product${nextIdx}.webp`;
+                                    imgPath1 = `/images/casual-product${idx}.webp`;
+                                    imgPath2 = `/images/casual-product${nextIdx}.webp`;
                                 } else if (product.category === 'Festive') {
                                     imgPath1 = `/images/festive-product${idx}.webp`;
                                     imgPath2 = `/images/festive-product${nextIdx}.webp`;
@@ -323,7 +321,6 @@
                                         <div class="card-price">
                                             <span class="price-item">Rs.<%= product.price %></span>
                                         </div>
-                                        <!-- Fixed CSS clipping issue by overriding -webkit-line-clamp -->
                                         <div class="card-summary" style="-webkit-line-clamp: unset; max-height: none; overflow: visible; margin-bottom: 10px;">
                                             <strong>Category:</strong> <%= product.category %> <br>
                                             <strong>Rating:</strong> <%= product.rating %> / 5 <br>
@@ -366,25 +363,25 @@
                 <div class="halo-row">
                     <div class="halo-item">
                         <a href="/collections/clearance-sale-upto-50-off-all-formals-01-oct-2025">
-                            <img src="/images/Formals.webp" alt="Shop by Style">
+                            <img src="/images/Formals.webp" alt="Shop Formals">
                         </a>
                     </div>
                     
                     <div class="halo-item">
                         <a href="/collections/clearance-sale-upto-50-off-all-casuals-01-oct-2025">
-                            <img src="/images/casuals.webp" alt="Shop by Style">
+                            <img src="/images/casuals.webp" alt="Shop Casuals">
                         </a>
                     </div>
                     
                     <div class="halo-item">
                         <a href="/collections/clearance-sale-upto-50-off-all-tehwar-01-oct-2025">
-                            <img src="/images/tehwar.webp" alt="Shop by Style">
+                            <img src="/images/tehwar.webp" alt="Shop Tehwar">
                         </a>
                     </div>
                     
                     <div class="halo-item">
                         <a href="/collections/all-accessories-full-price-01-oct-2025">
-                            <img src="/images/accessories.webp" alt="Shop by Style">
+                            <img src="/images/accessories.webp" alt="Shop Accessories">
                         </a>
                     </div>
                 </div>
@@ -517,7 +514,7 @@
         <div class="footer__content-bottom">
             <div class="container">
                 <div class="footer-copyright">
-                    <p>ROYALTAG © 2019 - 25 . ALL RIGHTS RESERVED</p>
+                    <p>ROYALTAG © 2019 - 2026 . ALL RIGHTS RESERVED</p>
                 </div>
                 
                 <!-- Payment Methods with icons -->
@@ -549,7 +546,7 @@
         </div>
     </div>
 
-    <!-- Vanilla JavaScript for Responsive Menu -->
+    <!-- JavaScript for Responsive Menu and Modals -->
     <script src="/js/script.js"></script>
 </body>
 </html>
