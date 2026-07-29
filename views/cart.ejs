@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Royal Tag</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-navigation">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                <div class="header-logo"><a href="/"><img src="//royaltag.com.pk/cdn/shop/files/Asset_1100_125x.png?v=1771415185" alt="RoyalTag" width="125" height="19"></a></div>
+                <div><a href="/" style="color: var(--color-primary); font-weight: 500;"><i class="fas fa-arrow-left"></i> Continue Shopping</a></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1 class="cart-header">Your Shopping Cart</h1>
+            
+            <% if (!cart || !cart.items || cart.items.length === 0) { %>
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h2>Your cart is currently empty.</h2>
+                    <p style="color: #666; margin: 15px 0 30px;">Looks like you haven't added anything to your cart yet.</p>
+                    <a href="/" class="btn" style="background: #111; color: white; padding: 12px 30px; border-radius: 4px;">Return to Shop</a>
+                </div>
+            <% } else { %>
+                <div class="cart-grid">
+                    <!-- Left Column: Items -->
+                    <div class="cart-items-wrapper">
+                        <% cart.items.forEach((item, index) => { 
+                            let displayImg = item.product.image;
+                            if(!displayImg) displayImg = `/images/product${(index % 3) + 1}.webp`;
+                        %>
+                            <div class="cart-item-row">
+                                <div class="cart-item-info">
+                                    <img src="<%= displayImg %>" alt="<%= item.product.name %>" class="cart-item-img">
+                                    <div>
+                                        <div class="cart-item-title"><%= item.product.name %></div>
+                                        <div class="cart-item-cat"><%= item.product.category %></div>
+                                    </div>
+                                </div>
+                                <div class="cart-item-price">Rs. <%= item.product.price %></div>
+                                <div class="cart-item-qty">Qty: <%= item.qty %></div>
+                                <div class="cart-item-remove">
+                                    <form action="/cart/remove/<%= item.product._id %>" method="POST">
+                                        <button type="submit">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    
+                    <!-- Right Column: Order Summary -->
+                    <div>
+                        <div class="cart-summary">
+                            <div class="summary-title">Order Summary</div>
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span>Rs. <%= cart.total %></span>
+                            </div>
+                            
+                            <% 
+                                let shipping = cart.total > 5000 ? 0 : 200; 
+                                let grandTotal = cart.total + shipping;
+                            %>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span><%= shipping === 0 ? 'Free' : `Rs. ${shipping}` %></span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Estimated Tax</span>
+                                <span>Calculated at checkout</span>
+                            </div>
+                            
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>Rs. <%= grandTotal %></span>
+                            </div>
+                            
+                            <button class="btn-checkout" onclick="alert('Proceeding to secure checkout!')">Checkout</button>
+                            
+                            <div style="margin-top: 20px; font-size: 13px; color: #777; text-align: center;">
+                                <i class="fas fa-lock"></i> Secure encrypted checkout
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+    <footer style="margin-top: 60px; padding: 20px 0; border-top: 1px solid #eaeaea; text-align: center; font-size: 13px; color: #888;">
+        ROYALTAG © 2019 - 25 . ALL RIGHTS RESERVED
+    </footer>
+</body>
+</html>
