@@ -9,6 +9,7 @@ dns.setServers([
 require('dotenv').config();                          // ADDED — load .env first
 
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").MongoStore;    // named import — required for v5/v6
@@ -26,7 +27,9 @@ const app = express();
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/assignment3";
 
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set("views", path.join(__dirname, "views"));
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());                             // ADDED — parse JSON bodies for API
 
