@@ -65,8 +65,12 @@ app.use((req, res, next) => {
 
 // Database Connection
 mongoose.connect(MONGO_URI)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
+    .then(() => {
+        console.log("MongoDB connected");
+    })
+    .catch(err => {
+        console.error("MongoDB connection error:", err);
+    });
 
 // ── ROUTES ──────────────────────────────────────────────
 // API routes (JWT) — completely separate from EJS session routes
